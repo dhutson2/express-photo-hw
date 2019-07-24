@@ -33,7 +33,15 @@ router.post('/', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
-    res.send('im an individual user, look at my pretty pics!')
+    User.findById(req.params.id, (err, foundUser) =>{
+        if(err){
+            res.send(err)
+        } else{
+            res.render('users/show.ejs', {
+                users: foundUser
+            })
+        }
+    })
 })
 
 router.delete('/:id', (req, res) => {
