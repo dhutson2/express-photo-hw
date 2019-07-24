@@ -2,9 +2,12 @@ const mongoose = require('mongoose')
 require('mongoose-type-url')
 
 const photoSchema = new mongoose.Schema({
-    user: String,
     title: String,
-    photos: String //FIXME: make this link to url to photo
+    url: String,
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }
 });
 
 const Photo = mongoose.model('Photo', photoSchema)
