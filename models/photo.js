@@ -4,9 +4,7 @@ require('mongoose-type-url')
 const photoSchema = new mongoose.Schema({
     user: String,
     title: String,
-    url: {
-        photo: mongoose.SchemaTypes.url
-    }
+    photos: String //FIXME: make this link to url to photo
 });
 
 const Photo = mongoose.model('Photo', photoSchema)
