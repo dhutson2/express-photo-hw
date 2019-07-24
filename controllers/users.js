@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const User = require('../models/user')
 
+// index route
 router.get('/', (req, res) => {
     User.find({}, (err, foundUser) => {
         if(err){
@@ -14,6 +15,7 @@ router.get('/', (req, res) => {
     })
 })
 
+// get and post routes to make new user
 router.get('/new', (req, res) => {
     res.render('users/new.ejs')
 })
@@ -32,6 +34,17 @@ router.post('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
     res.send('im an individual user, look at my pretty pics!')
+})
+
+router.delete('/:id', (req, res) => {
+    User.findByIdAndRemove(req.params.id, (err, deletedUser) =>{
+        console.log(deletedUser)
+        if(err){
+            res.send(err)
+        } else{
+            res.redirect('/users')
+        }
+    })
 })
 
 module.exports = router;
