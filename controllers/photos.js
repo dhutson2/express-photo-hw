@@ -29,13 +29,24 @@ router.post('/', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
-    Photo.find({}, (err, foundPhoto) => {
+    Photo.findById(req.params.id, (err, foundPhoto) => {
         if(err){
             res.send(err)
         } else{
-            res.render('photos/index.ejs', {
-                photos: foundPhoto
+            res.render('photos/show.ejs', {
+                photo: foundPhoto
             })
+        }
+    })
+})
+
+router.delete('/:id', (req, res) => {
+    Photo.findByIdAndDelete(req.params.id, (err, deletedPhoto) => {
+        if(err){
+            res.send(err)
+        } else{
+            console.log(deletedPhoto)
+            res.redirect('/photos')
         }
     })
 })
