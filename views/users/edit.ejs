@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <header>
+      <h1>Edit <%=user.name%>'s Info</h1>
+      <nav>
+        <ul>
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/users">Photographer List</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <h2>Rapper Attributes:</h2>
+      <form action="/users/<%=user._id%>?_method=PUT" method="post">
+        name: <input type="text" name="name" value="<%=user.name%>"/><br/>
+        specialty: <input type="text" name="specialty" value="<%=user.specialty%>"/><br/>
+        photos: <input type="image" value = <img src='https://www.allaboutbirds.org/guide/assets/photo/160654851-1280px.jpg'>
+        <input type="submit" value="Update Photographer"/>
+      </form>
+    </main>
+  </body>
+</html>

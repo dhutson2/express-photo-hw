@@ -24,7 +24,7 @@
           <% for(let i = 0; i < photos.length; i++){ %>
               <li>
                   <a href="/photos/<%=photos[i]._id%>"><%=photos[i].title%></a>
-                  <a href="/photos/<%=photos[i]._id%>"><img src=<%=photos[i].url%></a>
+                  <a href="/photos/<%=photos[i]._id%>"><img src="<%=photos[i].url%>"></a>
                   <form method="POST" action="/photos/<%=photos[i]._id%>?_method=DELETE">
                 <input type="submit" name="_method" value="DELETE"/>
             </form>
