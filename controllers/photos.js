@@ -1,10 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const Photo = require('../models/photo')
-const User = require('../models/user')
 
 router.get('/', (req, res) => {
-    res.send('hi, im a photo index route. show all the photoz here')
+    res.send('give me pix plz')
 })
 
 router.get('/:id', (req, res) => {
