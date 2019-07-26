@@ -4,10 +4,12 @@ require('mongoose-type-url')
 const photoSchema = new mongoose.Schema({
     title: String,
     url: String,
+    // userId: String
     user: {
+        required: true,
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    }
+    },
 });
 
 const Photo = mongoose.model('Photo', photoSchema)

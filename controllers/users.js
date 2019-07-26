@@ -20,16 +20,32 @@ router.get('/new', (req, res) => {
     res.render('users/new.ejs')
 })
 
-router.post('/', (req, res) => {
-    console.log(req.body);
-    User.create(req.body, (err, createdUser) => {
-        console.log(createdUser, '<-- created user')
-        if(err){
-            res.send(err)
-        } else{
-            res.redirect('/users')
-        }
-    })
+router.post('/new', async (req, res) => {
+    try{
+        const newUser = await User.create(req.body);
+        req.session.userId = newUser._id
+        res.redirect('/photos')
+    } catch(err){
+        res.send(err)
+    }
+})
+
+router.get('/login', (req, res) =>{
+    res.render('users/login.ejs')
+})
+
+router.post('/login', async (req, res) => {
+    try{
+    const userFromDb = await User.findOne({username: req.body.username})
+    if(userFromDb.password === req.body.password){
+        req.session.userId = userFromDb._id
+        res.redirect('./photos')
+    } else{
+        res.send('bad login!')
+    }
+    }catch(err) {
+        res.send(err)
+    }
 })
 
 router.get('/:id', (req, res) => {
