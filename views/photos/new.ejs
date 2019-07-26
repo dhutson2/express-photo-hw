@@ -19,7 +19,13 @@
       <form action="/photos" method="POST">
         Photo title: <input type="text" name="title" /></br>
         Photo url: <input type="text" name="url"/></br>
-        Photo user: <input type="text" name="user"/></br>
+        <select name="name">
+
+          <%for (let i = 0; i < users.length; i++){%>
+
+              <option value="<%=users[i]._id%>"><%=users[i].name%></option>
+          <%}%>
+        </select><br/>
         <input type="submit" value="create photo"/>
       </form>
     </main>

@@ -6,7 +6,7 @@ const photoSchema = new mongoose.Schema({
     url: String,
     // userId: String
     user: {
-        required: true,
+        // required: true,
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },

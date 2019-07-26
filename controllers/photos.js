@@ -19,12 +19,25 @@ router.get('/', (req, res) => {
 })
 
 router.get('/new', (req, res) => {
-    //query db for all users
-    res.render('photos/new.ejs')
-    //then pass found users here
+    User.find({}, (err, allUsers) => {
+        if(err){
+          res.send(err);
+        } else {
+          console.log(allUsers, "< -- new route in articles ")
+          console.log('authors array ^^^^^^^^^^^^^');
+          res.render('photos/new.ejs', {
+            users: allUsers
+          });
+    
+        }
+      })
 
 })
 router.post('/', (req, res) => {
+    if(!req.session.userId){
+        res.redirect('./users/login')
+    } else {
+        req.body.creator = req.session.userId
     Photo.create(req.body, (err, addedPhoto) => {
         if(err){
             res.send(err)
@@ -32,6 +45,8 @@ router.post('/', (req, res) => {
             res.redirect('/photos')
         }
     })
+    }
+    
 })
 
 // router.get('/:id', (req, res) => {

@@ -20,26 +20,30 @@ router.get('/new', (req, res) => {
     res.render('users/new.ejs')
 })
 
-router.post('/', async (req, res) => {
-    try{
-        const newUser = await User.create(req.body);
-        req.session.userId = newUser._id
-        res.redirect('/photos')
-    } catch(err){
-        res.send(err)
-    }
-})
-
 router.get('/login', (req, res) =>{
     res.render('users/login.ejs')
 })
 
-router.post('/login', async (req, res) => {
+router.post('/', async (req, res) =>{
+    console.log(req.body, '<-- form input')
     try{
-    const userFromDb = await User.findOne({username: req.body.username})
+        const newUser = await User.create(req.body);
+        console.log(newUser, '<-- new user')
+        req.session.userId = newUser._id
+        res.redirect('/photos')
+    }catch(err){
+        res.send(err)
+    }
+})
+
+router.post('/login', async (req, res) => {
+    console.log(req.body, '<-- found input')
+    try{
+    const userFromDb = await User.findOne({name: req.body.name})
+    console.log(userFromDb, '<-- user found')
     if(userFromDb.password === req.body.password){
         req.session.userId = userFromDb._id
-        res.redirect('./photos')
+        res.redirect('/photos')
     } else{
         res.send('bad login!')
     }
