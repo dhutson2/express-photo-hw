@@ -20,7 +20,7 @@ router.get('/new', (req, res) => {
     res.render('users/new.ejs')
 })
 
-router.post('/new', async (req, res) => {
+router.post('/', async (req, res) => {
     try{
         const newUser = await User.create(req.body);
         req.session.userId = newUser._id
